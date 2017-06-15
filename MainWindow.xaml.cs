@@ -41,7 +41,9 @@ namespace WpfApplication1
                 }
             }
 
-            //calcText.Text = string.Format("{0:#,0}", calcText.Text);
+            string before = calcText.Text;
+            string after = before.Replace(",", "");
+            calcText.Text = string.Format("{0:#,0}", int.Parse(after));
         }
     }
 }
