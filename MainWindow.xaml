@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="300">
+        Title="MainWindow" Height="445.715" Width="269.142">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -27,11 +28,11 @@
             </Grid.ColumnDefinitions>
             <Button Name="button0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="0" FontSize="36" Click="NumClick"/>
             <Button Name="button1" Grid.Row="3" Grid.Column="0" Content="1" FontSize="36" Click="NumClick"/>
-            <Button Name="button_point" Grid.Row="4" Grid.Column="2" Content="." FontSize="36"/>
+            <Button Name="button_point" Grid.Row="4" Grid.Column="2" Content="." FontSize="36" Click="PointClick"/>
             <Button Name="button_equal" Grid.Row="4" Grid.Column="3" Content="=" FontSize="36" Click="EqualClick"/>
             <Button Name="button2" Grid.Row="3" Grid.Column="1" Content="2" FontSize="36" Click="NumClick"/>
             <Button Name="button3" Grid.Row="3" Grid.Column="2" Content="3" FontSize="36" Click="NumClick"/>
-            <Button Name="operator_plus" Grid.Row="3" Grid.Column="3" Content="+" FontSize="36" Height="54" Margin="0.429,0.143,0.286,0" VerticalAlignment="Top" Click="OperatorClick"/>
+            <Button Name="operator_plus" Grid.Row="3" Grid.Column="3" Content="+" FontSize="36"  Click="OperatorClick"/>
             <Button Name="button4" Grid.Row="2" Grid.Column="0" Content="4" FontSize="36" Click="NumClick"/>
             <Button Name="button5" Grid.Row="2" Grid.Column="1" Content="5" FontSize="36" Click="NumClick"/>
             <Button Name="button6" Grid.Row="2" Grid.Column="2" Content="6" FontSize="36" Click="NumClick"/>
@@ -40,12 +41,13 @@
             <Button Name="button8" Grid.Row="1" Grid.Column="1" Content="8" FontSize="36" Click="NumClick"/>
             <Button Name="button9" Grid.Row="1" Grid.Column="2" Content="9" FontSize="36" Click="NumClick"/>
             <Button Name="operator_mul" Grid.Row="1" Grid.Column="3" Content="X" FontSize="36" Click="OperatorClick"/>
-            <Button Name="button_CE" Grid.Row="0" Grid.Column="0" Content="CE" FontSize="36"/>
-            <Button Name="button_C" Grid.Row="0" Grid.Column="1" Content="C" FontSize="36"/>
-            <Button Name="button_root" Grid.Row="0" Grid.Column="2" Content="√" FontSize="36"/>
+            <Button Name="button_CE" Grid.Row="0" Grid.Column="0" Content="CE" FontSize="36" Click="Clear"/>
+            <Button Name="operator_LeftBracket" Grid.Row="0" Grid.Column="1" Content="(" FontSize="36" Click="OperatorClick"/>
+            <Button Name="operator_RightBracket" Grid.Row="0" Grid.Column="2" Content=")" FontSize="36" Click="OperatorClick"/>
             <Button Name="operator_div" Grid.Row="0" Grid.Column="3" Content="/" FontSize="36" Click="OperatorClick"/>
 
         </Grid>
-        <TextBox Name="calcText" Grid.Row="0"  FontSize="64" TextAlignment="Right"/>
+        <TextBox Name="NumericalFormula" Grid.Row="0" FontSize="20" TextAlignment="Right" VerticalAlignment="Center" IsReadOnly="True"/>
+        <TextBox Name="calcText" Grid.Row="1"  FontSize="50" TextAlignment="Right" VerticalAlignment="Center" IsReadOnly="True"/>
     </Grid>
 </Window>

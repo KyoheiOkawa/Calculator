@@ -37,8 +37,12 @@ namespace WpfApplication1
             if (_isCalculated)
             {
                 calcText.Text = "";
+                NumericalFormula.Text = "";
                 _isCalculated = false;
             }
+
+            if(!IsDigit(calcText.Text))
+                calcText.Text = "";
 
             for(int i = 0; i <= 9; i++)
             {
@@ -50,13 +54,10 @@ namespace WpfApplication1
                     {
                         calcText.Text += i.ToString();
                         _calcStr += i.ToString();
+                        NumericalFormula.Text = _calcStr;
                     }
                 }
             }
-
-            //string before = calcText.Text;
-            //string after = before.Replace(",", "");
-            //calcText.Text = string.Format("{0:#,0}", int.Parse(after));
         }
 
         private void OperatorClick(object sender, RoutedEventArgs e)
@@ -73,21 +74,52 @@ namespace WpfApplication1
                 _calcStr += "*";
             else if (buttonName == str + "div")
                 _calcStr += "/";
+            else if (buttonName == str + "LeftBracket")
+                _calcStr += "(";
+            else if (buttonName == str + "RightBracket")
+                _calcStr += ")";
 
-            calcText.Text = "";
+            calcText.Text = _calcStr[_calcStr.Length-1].ToString();
+            NumericalFormula.Text = _calcStr;
+        }
+
+        private void PointClick(object sender, RoutedEventArgs e)
+        {
+            _calcStr += ".";
+            NumericalFormula.Text += ".";
+            calcText.Text += ".";
         }
 
         private void EqualClick(object sender, RoutedEventArgs e)
         {
             var root = new Node(_calcStr);
-
             root.Parse();
 
-            calcText.Text = root.Calculate().ToString();
+            try
+            {
+                calcText.Text = root.Calculate().ToString();
+            }
+            catch(System.FormatException)
+            {
+                calcText.Text = "ERROR";
+            }
 
             _calcStr = "";
 
             _isCalculated = true;
+        }
+
+        private void Clear(object sender, RoutedEventArgs e)
+        {
+            _calcStr = "";
+            calcText.Text = "";
+            NumericalFormula.Text = "";
+        }
+
+        private bool IsDigit(string str)
+        {
+            float res;
+            return float.TryParse(str,out res);
         }
     }
 
@@ -106,6 +138,7 @@ namespace WpfApplication1
 
         public void Parse()
         {
+            _expression = RemoveBracket(_expression);
             var posOperator = GetOperatorPos(_expression);
 
             if(posOperator < 0)
@@ -189,12 +222,12 @@ namespace WpfApplication1
 
         public float Calculate()
         {
-            if(_left != null && _right != null)
+            if (_left != null && _right != null)
             {
                 var leftOperand = _left.Calculate();
                 var rightOperand = _right.Calculate();
 
-                switch(this._expression)
+                switch (this._expression)
                 {
                     case "+": return leftOperand + rightOperand;
                     case "-": return leftOperand - rightOperand;
