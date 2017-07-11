@@ -12,3 +12,17 @@ C:\Users\Kyohei\Documents\授業\C#\WpfApplication1\obj\Release\WpfApplication1.
 C:\Users\Kyohei\Documents\授業\C#\WpfApplication1\obj\Release\WpfApplication1.exe
 C:\Users\Kyohei\Documents\授業\C#\WpfApplication1\obj\Release\WpfApplication1.pdb
 C:\Users\Kyohei\Documents\授業\C#\WpfApplication1\obj\Release\WpfApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Kyohei\Documents\授業\C#\Calculator\bin\Release\WpfApplication1.exe.config
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\WpfApplication1.exe
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\WpfApplication1.pdb
+C:\Users\Kyohei\Documents\授業\C#\Calculator\bin\Release\WpfApplication1.exe
+C:\Users\Kyohei\Documents\授業\C#\Calculator\bin\Release\WpfApplication1.pdb
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\WpfApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\MainWindow.g.cs
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\App.g.cs
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\WpfApplication1_MarkupCompile.cache
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\WpfApplication1_MarkupCompile.lref
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\MainWindow.baml
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\WpfApplication1.g.resources
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\WpfApplication1.Properties.Resources.resources
+C:\Users\Kyohei\Documents\授業\C#\Calculator\obj\Release\WpfApplication1.csproj.GenerateResource.Cache

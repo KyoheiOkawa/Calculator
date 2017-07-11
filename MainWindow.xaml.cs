@@ -27,11 +27,13 @@ namespace WpfApplication1
         /// <summary>
         /// 実際に計算するのに使用する文字列
         /// </summary>
-        string _calcStr;
+        string _calcStr = "0";
 
         public MainWindow()
         {
             InitializeComponent();
+            calcText.Text = "0";
+            NumericalFormula.Text = "0";
         }
         /// <summary>
         /// 数字ボタンを押したときに呼ばれる関数
@@ -46,10 +48,7 @@ namespace WpfApplication1
             //計算後に数字ボタンが押されたらリセットする
             if (_isCalculated)
             {
-                calcText.Text = "";
-                NumericalFormula.Text = "";
-                _calcStr = "";
-                _isCalculated = false;
+                Reset();
             }
 
             //前回入力した物が数字以外であったら表示をリセット
@@ -60,16 +59,20 @@ namespace WpfApplication1
             {
                 var newStr = str + i.ToString();
 
-                if(button.Name == newStr)
+                if (button.Name == newStr)
                 {
-                    //0ボタンが押されたときに前回入力した数字がなかったら
-                    //以下の処理を飛ばす
-                    if (!(i == 0 && calcText.Text == ""))
+                    if (_calcStr == "0" && i == 0)
+                        return;
+
+                    if (calcText.Text == "0")
                     {
-                        calcText.Text += i.ToString();
-                        _calcStr += i.ToString();
-                        NumericalFormula.Text = _calcStr;
+                        calcText.Text = "";
+                        _calcStr = "";
                     }
+
+                    calcText.Text += i.ToString();
+                    _calcStr += i.ToString();
+                    NumericalFormula.Text = _calcStr;
                 }
             }
         }
@@ -80,6 +83,9 @@ namespace WpfApplication1
         /// <param name="e"></param>
         private void OperatorClick(object sender, RoutedEventArgs e)
         {
+            if (_isCalculated)
+                return;
+
             var button = (Button)sender;
             var buttonName = button.Name;
             const string str = "operator_";
@@ -98,7 +104,7 @@ namespace WpfApplication1
                 _calcStr += ")";
 
             //入力表示用テキストボックスに押された演算子の記号を表示する
-            calcText.Text = _calcStr[_calcStr.Length-1].ToString();
+            calcText.Text = _calcStr[_calcStr.Length - 1].ToString();
             NumericalFormula.Text = _calcStr;
         }
         /// <summary>
@@ -108,8 +114,11 @@ namespace WpfApplication1
         /// <param name="e"></param>
         private void PointClick(object sender, RoutedEventArgs e)
         {
+            if (!IsDigit(calcText.Text) || _isCalculated)
+                return;
+
             //現在入力途中の数に小数点が含まれていない場合に小数点を追加する
-            if (calcText.Text.Contains("."))
+            if (!calcText.Text.Contains("."))
             {
                 _calcStr += ".";
                 NumericalFormula.Text += ".";
@@ -150,9 +159,16 @@ namespace WpfApplication1
         /// <param name="e"></param>
         private void Clear(object sender, RoutedEventArgs e)
         {
+            Reset();
+        }
+        /// <summary>
+        /// 表示、計算結果をリセットする
+        /// </summary>
+        private void Reset()
+        {
             _calcStr = "";
-            calcText.Text = "";
-            NumericalFormula.Text = "";
+            calcText.Text = "0";
+            NumericalFormula.Text = "0";
             _isCalculated = false;
         }
         /// <summary>
