@@ -51,7 +51,7 @@ namespace WpfApplication1
                 Reset();
             }
 
-            //前回入力した物が数字以外であったら表示をリセット
+            //前回入力した物が数字以外（演算子）であったら表示をリセット
             if(!IsDigit(calcText.Text))
                 calcText.Text = "";
 
@@ -61,15 +61,18 @@ namespace WpfApplication1
 
                 if (button.Name == newStr)
                 {
+                    //最初の入力かつ押したボタンが０だったら処理をしない
                     if (_calcStr == "0" && i == 0)
                         return;
 
-                    if (calcText.Text == "0")
+                    //最初の数字入力の時文字列をリセットする
+                    if (calcText.Text == "0" && _calcStr == "0")
                     {
                         calcText.Text = "";
                         _calcStr = "";
                     }
 
+                    //文字列を設定
                     calcText.Text += i.ToString();
                     _calcStr += i.ToString();
                     NumericalFormula.Text = _calcStr;
@@ -85,6 +88,13 @@ namespace WpfApplication1
         {
             if (_isCalculated)
                 return;
+
+            //最初の数字入力の時文字列をリセットする
+            if (calcText.Text == "0" && _calcStr == "0")
+            {
+                calcText.Text = "";
+                _calcStr = "";
+            }
 
             var button = (Button)sender;
             var buttonName = button.Name;
@@ -166,7 +176,7 @@ namespace WpfApplication1
         /// </summary>
         private void Reset()
         {
-            _calcStr = "";
+            _calcStr = "0";
             calcText.Text = "0";
             NumericalFormula.Text = "0";
             _isCalculated = false;
@@ -176,7 +186,7 @@ namespace WpfApplication1
         /// </summary>
         /// <param name="str">判定する文字列</param>
         /// <returns>数値であったらtrueそうでなかったらfalse</returns>
-        private bool IsDigit(string str)
+        public static bool IsDigit(string str)
         {
             float res;
             return float.TryParse(str,out res);
@@ -295,6 +305,22 @@ namespace WpfApplication1
                     case '(': nest++; continue;
                     case ')': nest--; continue;
                     default: continue;
+                }
+
+                bool isBracketBeforChar = false;
+                //前回が括弧であるか判定する
+                if (i > 0)
+                {
+                    string beforStr = expression[i - 1].ToString();
+                    isBracketBeforChar = (beforStr == "(") || (beforStr == ")");
+                }
+                //-4,(-4),+4,(+4)といった表現を識別し
+                //それらを一つの数字として認識するために
+                //ループを飛ばす
+                if(priority == 2 &&
+                    (i==0 || isBracketBeforChar))
+                {
+                    continue;
                 }
 
                 if(nest == 0 && priority <= lowestPriority)
